@@ -1,19 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { ReactElement } from 'react';
+import { StyleSheet, View, Platform, StatusBar } from 'react-native';
+import { mtg } from './src/assets/static/colors';
+import { MainProvider } from './src/hooks/MainContext';
+import { Landing } from './src/views/Landing/Landing';
 
-export default function App() {
+const App = (): ReactElement => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <MainProvider>
+      <View style={styles.mainContainer}>
+        <StatusBar />
+        <Landing />
+      </View>
+    </MainProvider>
   );
-}
-
+};
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
+    backgroundColor: mtg.trueWhite,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20,
   },
 });
+export default App;
