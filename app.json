@@ -1,0 +1,12 @@
+{
+  "name": "MTG-Life-Counter-TS",
+  "displayName": "MTG-Life-Counter-TS",
+  "expo": {
+    "name": "MTG-Life-Counter-TS",
+    "slug": "MTG-Life-Counter-TS",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
