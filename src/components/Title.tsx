@@ -2,22 +2,33 @@ import React, { ReactElement } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { StyledText } from './StyledText';
 
-interface Props {
-  textValue: string;
+interface IStylesProps {
+  container?: {};
+  text?: {};
 }
-export const Title = ({ textValue }: Props): ReactElement => (
-  <View style={styles.container}>
-    <StyledText styles={styles.titleText}>{textValue}</StyledText>
+
+interface IProps {
+  textValue: string;
+  styles?: IStylesProps;
+}
+export const Title = ({
+  textValue,
+  styles = { container: {}, text: {} },
+}: IProps): ReactElement => (
+  <View style={{ ...titleStyles.container, ...styles.container }}>
+    <StyledText styles={{ ...titleStyles.text, ...titleStyles.text }}>
+      {textValue}
+    </StyledText>
   </View>
 );
 
-const styles = StyleSheet.create({
+const titleStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
     padding: 20,
     paddingBottom: 50,
   },
-  titleText: {
+  text: {
     fontSize: 45,
     textAlign: 'center',
   },
