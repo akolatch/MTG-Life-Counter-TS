@@ -7,7 +7,11 @@ import { useSingleValueAnimation } from '../../hooks/useSingleValueAnimation';
 import { FormatSelector } from './components/FormatSelector';
 import { NumPlayerSelector } from './components/NumPlayerSelector';
 
-export const Landing = (): ReactElement => {
+interface LandingProps {
+  setStartGame: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Landing = ({ setStartGame }: LandingProps): ReactElement => {
   const {
     useFormats: [, setFormat],
   } = useContext(MainContext);
@@ -15,7 +19,6 @@ export const Landing = (): ReactElement => {
     numPlayersDisplay,
     toggleNumPlayersDisplay,
   ] = useSingleValueAnimation();
-  const [startGame, setStartGame] = useState(false);
 
   const select = (format: FormatTypes): void => {
     setFormat(format);

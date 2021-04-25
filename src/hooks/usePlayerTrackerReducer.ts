@@ -9,7 +9,7 @@ interface IState {
   startingLife: number;
 }
 
-interface IAction {
+export interface IAction {
   type: PlayerTAction;
   numPayload: number;
   stringPayload: string;
