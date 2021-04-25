@@ -8,13 +8,13 @@ interface StylesProps {
   text?: {};
 }
 
-interface Props {
+interface IProps {
   title: string;
   press: () => any;
   styles: StylesProps;
 }
 
-export const TouchButton = ({ title, press, styles }: Props): ReactElement => (
+export const TouchButton = ({ title, press, styles }: IProps): ReactElement => (
   <TouchableOpacity style={styles.container} onPress={press}>
     <View style={styles.view}>
       <StyledText styles={styles.text}>{title}</StyledText>

@@ -23,7 +23,7 @@ export const MainContext = createContext<IContextProps>({
 });
 
 export const MainProvider: FunctionComponent = ({ children }) => {
-  const [playerList, setPayerList] = useState<IPlayerIds[]>([]);
+  const [playerList, setPlayerList] = useState<IPlayerIds[]>([]);
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const MainProvider: FunctionComponent = ({ children }) => {
   return (
     <MainContext.Provider
       value={{
-        usePlayerList: [playerList, (val) => setPayerList(val)],
+        usePlayerList: [playerList, (val) => setPlayerList(val)],
         useReset: [reset, (val) => setReset(val)],
         onReset,
       }}
