@@ -1,7 +1,9 @@
+import { FormatTypes } from '../../../types';
+
 interface formatData {
   id: number;
   display: string;
-  type: string;
+  type: FormatTypes;
 }
 
 export const formatList: [formatData, formatData, formatData] = [

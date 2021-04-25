@@ -3,25 +3,27 @@ import React, {
   useEffect,
   useState,
   FunctionComponent,
-  Dispatch,
-  SetStateAction,
 } from 'react';
 
-export interface PlayerIds {
+export interface IPlayerIds {
   id: string;
   playerNum: number;
 }
 
-interface ContextProps {
-  useReset: [boolean, Dispatch<SetStateAction<boolean>>];
-  usePlayerList: [PlayerIds[], Dispatch<SetStateAction<PlayerIds[]>>];
-  onReset: (cb: () => any) => any;
+interface IContextProps {
+  useReset: [boolean, (val: boolean) => void];
+  usePlayerList: [IPlayerIds[], (arr: IPlayerIds[]) => void];
+  onReset: (cb: () => void) => void;
 }
 
-export const MainContext = createContext<Partial<ContextProps>>({});
+export const MainContext = createContext<IContextProps>({
+  usePlayerList: [[], (val) => {}],
+  useReset: [true, (val) => {}],
+  onReset: (cb) => {},
+});
 
 export const MainProvider: FunctionComponent = ({ children }) => {
-  const [playerList, setPayerList] = useState<PlayerIds[]>([]);
+  const [playerList, setPayerList] = useState<IPlayerIds[]>([]);
   const [reset, setReset] = useState(false);
 
   useEffect(() => {
@@ -41,8 +43,8 @@ export const MainProvider: FunctionComponent = ({ children }) => {
   return (
     <MainContext.Provider
       value={{
-        usePlayerList: [playerList, setPayerList],
-        useReset: [reset, setReset],
+        usePlayerList: [playerList, (val) => setPayerList(val)],
+        useReset: [reset, (val) => setReset(val)],
         onReset,
       }}
     >

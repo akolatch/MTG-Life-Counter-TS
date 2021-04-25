@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
+import { FormatTypes } from '../../../../types';
 import { main, mtg } from '../../../assets/static/colors';
 import { formatList } from '../../../assets/static/formats';
 import { TouchButton } from '../../../components/TouchButton';
 
 interface FormatSelectorProps {
-  select: (format: string) => void;
+  select: (format: FormatTypes) => void;
 }
 
 export const FormatSelector = ({
