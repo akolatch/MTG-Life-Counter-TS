@@ -7,7 +7,7 @@ interface formatData {
 }
 
 export const formatList: [formatData, formatData, formatData] = [
-  { id: 1, display: '2 Player', type: '2_PLAYER' },
+  { id: 1, display: 'Classic', type: 'CLASSIC' },
   { id: 2, display: '2 Headed Giant', type: '2_HEADED_GIANT' },
   { id: 3, display: 'Commander', type: 'COMMANDER' },
 ];
