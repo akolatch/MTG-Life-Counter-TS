@@ -1,25 +1,29 @@
-import React, { useState, ReactElement, useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState, ReactElement, useRef, useContext } from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
 import { FormatTypes } from '../../../types';
 import { Title } from '../../components/Title';
+import { MainContext } from '../../hooks/MainContext';
+import { useSingleValueAnimation } from '../../hooks/useSingleValueAnimation';
 import { FormatSelector } from './components/FormatSelector';
 import { NumPlayerSelector } from './components/NumPlayerSelector';
 
 export const Landing = (): ReactElement => {
-  const [format, setFormat] = useState<FormatTypes>('2_PLAYER');
-
-  const [showNumPlayer, setShowNumPlayer] = useState(false);
+  const {
+    useFormats: [, setFormat],
+  } = useContext(MainContext);
+  const [
+    numPlayersDisplay,
+    toggleNumPlayersDisplay,
+  ] = useSingleValueAnimation();
   const [startGame, setStartGame] = useState(false);
-
-  const firstRender = useRef(true);
 
   const select = (format: FormatTypes): void => {
     setFormat(format);
-    setShowNumPlayer(true);
+    toggleNumPlayersDisplay(1, 500);
   };
 
   const close = (): void => {
-    setShowNumPlayer(false);
+    toggleNumPlayersDisplay(0, 200);
     setStartGame(true);
   };
 
@@ -27,15 +31,27 @@ export const Landing = (): ReactElement => {
     <View style={styles.container}>
       <Title textValue='LIFE COUNTER' />
       <FormatSelector select={select} />
-      {showNumPlayer && <NumPlayerSelector close={close} />}
+      <Animated.View
+        style={{
+          transform: [
+            {
+              translateY: numPlayersDisplay.interpolate({
+                inputRange: [0, 1],
+                outputRange: [400, 0],
+              }),
+            },
+          ],
+          opacity: numPlayersDisplay,
+        }}
+      >
+        <NumPlayerSelector close={close} />
+      </Animated.View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     paddingTop: 20,
-    // alignContent: 'space-between',
   },
 });

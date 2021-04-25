@@ -18,7 +18,7 @@ interface IAction {
 export const usePlayerTrackerReducer = () => {
   const reducer = (state: IState, action: IAction): IState => {
     switch (action.type) {
-      case '2_PLAYER':
+      case 'CLASSIC':
         return {
           playerId: action.numPayload,
           name: '',

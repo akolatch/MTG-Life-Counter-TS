@@ -36,7 +36,7 @@ export const NumPlayerSelector = ({ close }: IProps): ReactElement => {
   return (
     <View style={styles.container}>
       <Title
-        textValue='Number of Players?'
+        textValue='Players?'
         styles={{ container: { paddingBottom: 15 } }}
       />
       <View style={styles.listContainer}>
@@ -67,7 +67,7 @@ export const NumPlayerSelector = ({ close }: IProps): ReactElement => {
 const styles = StyleSheet.create({
   container: {
     // flex: 0.5,
-    paddingTop: 40,
+    paddingTop: 60,
     // backgroundColor: 'red',
   },
   listContainer: {
@@ -80,6 +80,10 @@ const btnStyles = StyleSheet.create({
     color: mtg.trueWhite,
     fontSize: 60,
     alignSelf: 'center',
+    shadowColor: 'black',
+    shadowOffset: { width: -1, height: -1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
   },
   container: {
     alignItems: 'center',
@@ -88,7 +92,7 @@ const btnStyles = StyleSheet.create({
   view: {
     backgroundColor: main.grey,
     padding: 5,
-    borderRadius: 90 / 2,
+    borderRadius: 90 / 4,
     width: 90,
     height: 90,
   },
