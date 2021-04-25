@@ -1,8 +1,12 @@
-export const main = {
+interface Map {
+  [key: string]: string | undefined;
+}
+
+export const main: Map = {
   grey: '#ADA8B6',
   drkGrey: '#403e3b',
 };
-export const mtg = {
+export const mtg: Map = {
   offWhite: '#f8e7b9',
   offBlue: '#b3ceea',
   offBlack: '#a69f9d',
