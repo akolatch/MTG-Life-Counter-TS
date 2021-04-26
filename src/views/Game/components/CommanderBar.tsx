@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { PlayerColorProps } from '../../../assets/Interfaces/PlayerColorProps';
 import { colorList } from '../../../assets/static/colors';
 import { MainContext } from '../../../hooks/MainContext';
-import { PoisonTracker } from './PoisonTracker';
+import { CounterTracker } from './CounterTracker';
 
 export const CommanderDMGList = ({ color }: PlayerColorProps): ReactElement => {
   const {
@@ -16,9 +16,9 @@ export const CommanderDMGList = ({ color }: PlayerColorProps): ReactElement => {
   return (
     <View style={styles.container}>
       {opponentsColorList.map((opponentColor, i) => {
-        return <PoisonTracker key={i} color={opponentColor} />;
+        return <CounterTracker key={i} color={opponentColor} />;
       })}
-      <PoisonTracker color={color} />
+      <CounterTracker color={color} />
     </View>
   );
 };

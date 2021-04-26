@@ -11,7 +11,7 @@ import { mtg } from '../../../assets/static/colors';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
 
-export const PoisonTracker = ({ color }: PlayerColorProps): ReactElement => {
+export const CounterTracker = ({ color }: PlayerColorProps): ReactElement => {
   const [damage, setDamage] = useState(0);
   const [showMinus, setShowMinus] = useState(false);
   const increment = useRef(1);
@@ -32,7 +32,7 @@ export const PoisonTracker = ({ color }: PlayerColorProps): ReactElement => {
   const longPress = (): void => {
     if (damage > 0) {
       increment.current = -1;
-      setShowMinus((s) => !s);
+      setShowMinus(true);
     }
   };
 

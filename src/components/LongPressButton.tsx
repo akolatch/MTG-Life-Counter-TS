@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useRef } from 'react';
 import { Pressable, View } from 'react-native';
-import { IButtonProps } from '../assets/static/buttonPropsInterface';
+import { IButtonProps } from '../assets/Interfaces';
 import { StyledText } from './StyledText';
 
 export const LongPressButton = ({

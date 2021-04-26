@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Animated } from 'react-native';
-import { AnimationTuple } from '../assets/static/types';
+import { AnimationTuple } from '../assets/types';
 
 export const useSingleValueAnimation = (): AnimationTuple => {
   const animationValue = useRef(new Animated.Value(0)).current;

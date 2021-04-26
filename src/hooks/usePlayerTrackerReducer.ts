@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
-import { PlayerTAction } from '../assets/static/types';
+import { Action } from '../assets/Interfaces';
 
-interface IState {
+interface PlayerState {
   playerId: number;
   name: string;
   placeholder: string;
@@ -9,14 +9,8 @@ interface IState {
   startingLife: number;
 }
 
-export interface IAction {
-  type: PlayerTAction;
-  numPayload: number;
-  stringPayload: string;
-}
-
 export const usePlayerTrackerReducer = () => {
-  const reducer = (state: IState, action: IAction): IState => {
+  const reducer = (state: PlayerState, action: Action): PlayerState => {
     switch (action.type) {
       case 'CLASSIC':
         return {

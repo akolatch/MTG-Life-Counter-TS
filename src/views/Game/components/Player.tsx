@@ -1,18 +1,16 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
-import { PlayerTAction } from '../../../assets/types';
+import { PlayerAction } from '../../../assets/types';
 import { colorList, mtg } from '../../../assets/static/colors';
 import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
-import {
-  usePlayerTrackerReducer,
-  IAction,
-} from '../../../hooks/usePlayerTrackerReducer';
+import { usePlayerTrackerReducer } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
-import { getWindowWidth, width } from '../../../assets/static/screenSize';
-import { PoisonTracker } from './PoisonTracker';
+import { width } from '../../../assets/static/screenSize';
+import { CounterTracker } from './CounterTracker';
 import { CommanderDMGList } from './CommanderBar';
+import { Action } from '../../../assets/Interfaces';
 
 interface PlayerProps {
   id: number;
@@ -29,10 +27,10 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
   const [playersDisplay, animatePlayersDisplay] = useSingleValueAnimation();
 
   const createAction = (
-    type: PlayerTAction,
+    type: PlayerAction,
     numPayload: number = 0,
     stringPayload: string = ''
-  ): IAction => ({
+  ): Action => ({
     type,
     numPayload,
     stringPayload,
@@ -80,7 +78,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
             <CommanderDMGList color={color} />
           ) : (
             <View style={styles.poisonContainer}>
-              <PoisonTracker color={color} />
+              <CounterTracker color={color} />
             </View>
           )}
         </View>
