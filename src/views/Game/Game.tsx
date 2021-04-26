@@ -1,7 +1,5 @@
 import React, { ReactElement, useContext } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { main } from '../../assets/static/colors';
-import { TouchButton } from '../../components/TouchButton';
+import { View, StyleSheet } from 'react-native';
 import { MainContext } from '../../hooks/MainContext';
 import { NavBar } from './components/NavBar';
 import { Player } from './components/Player';
@@ -12,7 +10,6 @@ interface GameProps {
 
 export const Game = ({ setStartGame }: GameProps): ReactElement => {
   const {
-    useFormats: [format],
     usePlayerList: [playerList],
   } = useContext(MainContext);
 
@@ -32,20 +29,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 20,
     paddingBottom: 20,
-  },
-  navBar: {
-    borderTopWidth: 1,
-    borderColor: main.grey,
-    paddingTop: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-});
-
-const btn = StyleSheet.create({
-  text: {
-    color: main.drkGrey,
-    fontSize: 20,
   },
 });

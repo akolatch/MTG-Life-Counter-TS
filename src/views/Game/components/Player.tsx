@@ -11,6 +11,7 @@ import {
 } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
 import { width } from '../../../assets/static/screenSize';
+import { PoisonTracker } from './PoisonTracker';
 
 interface PlayerProps {
   id: number;
@@ -73,13 +74,12 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
               dispatch(createAction('CHANGE_NAME', 0, text))
             }
           />
-          {/* {format === 'COMMANDER' ? (
-          <CommanderDMGList color={color} numPlayers={numPlayers} />
-        ) : (
-          <View style={styles.poisonContainer}>
-            <PoisonCounter color={color} />
-          </View>
-        )} */}
+          {format === 'COMMANDER' ? null : (
+            // <CommanderDMGList color={color} numPlayers={numPlayers} />
+            <View style={styles.poisonContainer}>
+              <PoisonTracker color={color} />
+            </View>
+          )}
         </View>
         <View style={styles.center}>
           <View style={styles.lifeContainer}>
@@ -88,10 +88,10 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
               press={() => changeLife(-1)}
               styles={{
                 text: {
-                  fontSize: 50,
-                  paddingRight: 30,
+                  fontSize: 60,
                   color: mtg[`true${color}`],
                 },
+                ...btnStyles,
               }}
             />
 
@@ -107,10 +107,10 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
               press={() => changeLife(1)}
               styles={{
                 text: {
-                  fontSize: 50,
-                  paddingLeft: 30,
+                  fontSize: 60,
                   color: mtg[`true${color}`],
                 },
+                ...btnStyles,
               }}
             />
           </View>
@@ -121,7 +121,18 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
 };
 
 const btnStyles = StyleSheet.create({
-  container: {},
+  container: {
+    // backgroundColor: 'blue',
+    width: width / 3,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 100,
+  },
+  view: {
+    // backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 const styles = StyleSheet.create({
@@ -132,6 +143,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'flex-start',
+    // backgroundColor: 'red',
+    height: 50,
   },
   name: {
     fontFamily: 'HelveticaNeue-Bold',
