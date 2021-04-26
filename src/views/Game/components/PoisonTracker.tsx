@@ -6,46 +6,59 @@ import React, {
   ReactElement,
 } from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
+import { PlayerColorProps } from '../../../assets/Interfaces/PlayerColorProps';
 import { mtg } from '../../../assets/static/colors';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
 
-interface PoisonTrackerProps {
-  color: string;
-}
-export const PoisonTracker = ({ color }: PoisonTrackerProps): ReactElement => {
+export const PoisonTracker = ({ color }: PlayerColorProps): ReactElement => {
   const [damage, setDamage] = useState(0);
+  const [showMinus, setShowMinus] = useState(false);
+  const increment = useRef(1);
 
   const { onReset } = useContext(MainContext);
   onReset(() => {
     setDamage(0);
+    setShowMinus(false);
+    increment.current = 1;
   });
 
-  const press = () => {
-    setDamage((prevState) => prevState + 1);
+  const press = (): void => {
+    setDamage((prevState) =>
+      prevState + increment.current < 0 ? 0 : prevState + increment.current
+    );
   };
 
-  const longCall = useRef<any>(null);
+  const longPress = (): void => {
+    if (damage > 0) {
+      increment.current = -1;
+      setShowMinus((s) => !s);
+    }
+  };
+
+  const clicksStoppedTimer = useRef<any>(null);
 
   useEffect(() => {
-    return () => clearInterval(longCall.current);
-  }, []);
+    if (showMinus) {
+      clearTimeout(clicksStoppedTimer.current);
+      clicksStoppedTimer.current = setTimeout((): void => {
+        setShowMinus(false);
+        increment.current = 1;
+      }, 500);
+    }
+    return (): void => clearTimeout(clicksStoppedTimer.current);
+  }, [damage]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.btnContainer}>
       <Pressable
         style={({ pressed }) => [{ opacity: pressed ? 1 : 0.75 }]}
-        onPressIn={press}
-        onLongPress={() => {
-          longCall.current = setInterval(press, 200);
-        }}
-        onPressOut={() => {
-          clearInterval(longCall.current);
-        }}
+        onLongPress={longPress}
+        onPressOut={press}
       >
         <View style={styles.view}>
           <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
-            {`P ${damage}`}
+            {showMinus ? `- ${damage}` : `P ${damage}`}
           </StyledText>
         </View>
       </Pressable>
@@ -65,7 +78,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 30,
   },
-  container: {
+  btnContainer: {
     backgroundColor: mtg.trueWhite,
     borderRadius: 30 / 2,
     width: 50,

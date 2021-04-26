@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
-import { PlayerTAction } from '../../../assets/static/types';
+import { PlayerTAction } from '../../../assets/types';
 import { colorList, mtg } from '../../../assets/static/colors';
 import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
@@ -12,6 +12,7 @@ import {
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
 import { getWindowWidth, width } from '../../../assets/static/screenSize';
 import { PoisonTracker } from './PoisonTracker';
+import { CommanderDMGList } from './CommanderBar';
 
 interface PlayerProps {
   id: number;
@@ -26,6 +27,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
   const [player, dispatch] = usePlayerTrackerReducer();
   const color = colorList[id - 1];
   const [playersDisplay, animatePlayersDisplay] = useSingleValueAnimation();
+
   const createAction = (
     type: PlayerTAction,
     numPayload: number = 0,
@@ -74,8 +76,9 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
               dispatch(createAction('CHANGE_NAME', 0, text))
             }
           />
-          {format === 'COMMANDER' ? null : (
-            // <CommanderDMGList color={color} numPlayers={numPlayers} />
+          {format === 'COMMANDER' ? (
+            <CommanderDMGList color={color} />
+          ) : (
             <View style={styles.poisonContainer}>
               <PoisonTracker color={color} />
             </View>
