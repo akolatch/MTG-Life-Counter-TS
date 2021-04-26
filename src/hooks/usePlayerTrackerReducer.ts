@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { Action } from '../assets/Interfaces';
+import { Action } from '../lib/Interfaces';
 
 interface PlayerState {
   playerId: number;

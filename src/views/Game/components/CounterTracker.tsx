@@ -6,7 +6,7 @@ import React, {
   ReactElement,
 } from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
-import { PlayerColorProps } from '../../../assets/Interfaces/PlayerColorProps';
+import { PlayerColorProps } from '../../../lib/Interfaces/PlayerColorProps';
 import { mtg } from '../../../assets/static/colors';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';

@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
-import { PlayerAction } from '../../../assets/types';
+import { PlayerAction } from '../../../lib/types';
 import { colorList, mtg } from '../../../assets/static/colors';
 import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
@@ -10,7 +10,7 @@ import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation'
 import { width } from '../../../assets/static/screenSize';
 import { CounterTracker } from './CounterTracker';
 import { CommanderDMGList } from './CommanderBar';
-import { Action } from '../../../assets/Interfaces';
+import { Action } from '../../../lib/Interfaces';
 
 interface PlayerProps {
   id: number;

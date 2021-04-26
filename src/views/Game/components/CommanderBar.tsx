@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { PlayerColorProps } from '../../../assets/Interfaces/PlayerColorProps';
+import { PlayerColorProps } from '../../../lib/Interfaces/PlayerColorProps';
 import { colorList } from '../../../assets/static/colors';
 import { MainContext } from '../../../hooks/MainContext';
 import { CounterTracker } from './CounterTracker';

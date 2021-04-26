@@ -1,4 +1,4 @@
-import { FormatTypes } from '../types';
+import { FormatTypes } from '../../lib/types';
 
 interface formatData {
   id: number;

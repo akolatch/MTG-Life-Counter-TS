@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
-import { FormatTypes } from '../../../assets/types';
+import { FormatTypes } from '../../../lib/types';
 import { main, mtg } from '../../../assets/static/colors';
 import { formatList } from '../../../assets/static/formats';
 import { TouchButton } from '../../../components/TouchButton';

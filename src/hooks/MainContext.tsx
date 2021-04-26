@@ -4,7 +4,7 @@ import React, {
   useState,
   FunctionComponent,
 } from 'react';
-import { FormatTypes } from '../assets/types';
+import { FormatTypes } from '../lib/types';
 
 export interface IPlayerIds {
   id: string;
