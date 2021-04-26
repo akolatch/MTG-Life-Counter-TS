@@ -2,7 +2,7 @@ import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
 import { PlayerTAction } from '../../../assets/static/types';
 import { colorList, mtg } from '../../../assets/static/colors';
-import { PressButton } from '../../../components/PressButton';
+import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
 import {
@@ -10,7 +10,7 @@ import {
   IAction,
 } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
-import { width } from '../../../assets/static/screenSize';
+import { getWindowWidth, width } from '../../../assets/static/screenSize';
 import { PoisonTracker } from './PoisonTracker';
 
 interface PlayerProps {
@@ -83,7 +83,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
         </View>
         <View style={styles.center}>
           <View style={styles.lifeContainer}>
-            <PressButton
+            <LongPressButton
               title='-'
               press={() => changeLife(-1)}
               styles={{
@@ -102,7 +102,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
                 {player.lifeTotal}
               </StyledText>
             </View>
-            <PressButton
+            <LongPressButton
               title='+'
               press={() => changeLife(1)}
               styles={{
