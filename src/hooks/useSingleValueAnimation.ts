@@ -1,9 +1,10 @@
 import { useRef } from 'react';
 import { Animated } from 'react-native';
-import { AnimationTuple } from '../../types';
+import { AnimationTuple } from '../assets/static/types';
 
 export const useSingleValueAnimation = (): AnimationTuple => {
   const animationValue = useRef(new Animated.Value(0)).current;
+
   const setAnimationValue = (
     newAnimationValue: number,
     timing: number

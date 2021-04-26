@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { PlayerTAction } from '../../types';
+import { PlayerTAction } from '../assets/static/types';
 
 interface IState {
   playerId: number;
@@ -22,7 +22,7 @@ export const usePlayerTrackerReducer = () => {
         return {
           playerId: action.numPayload,
           name: '',
-          placeholder: `Player ${action.numPayload}`,
+          placeholder: `Player${action.numPayload}`,
           lifeTotal: 20,
           startingLife: 20,
         };
@@ -30,7 +30,7 @@ export const usePlayerTrackerReducer = () => {
         return {
           playerId: action.numPayload,
           name: '',
-          placeholder: `Team ${action.numPayload}`,
+          placeholder: `Team${action.numPayload}`,
           lifeTotal: 30,
           startingLife: 30,
         };
@@ -38,7 +38,7 @@ export const usePlayerTrackerReducer = () => {
         return {
           playerId: action.numPayload,
           name: '',
-          placeholder: `Player ${action.numPayload}`,
+          placeholder: `Player${action.numPayload}`,
           lifeTotal: 40,
           startingLife: 40,
         };

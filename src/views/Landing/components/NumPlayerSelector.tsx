@@ -5,11 +5,11 @@ import { Title } from '../../../components/Title';
 import { TouchButton } from '../../../components/TouchButton';
 import { MainContext } from '../../../hooks/MainContext';
 
-interface IProps {
+interface NumPlayerProps {
   close: () => void;
 }
 
-export const NumPlayerSelector = ({ close }: IProps): ReactElement => {
+export const NumPlayerSelector = ({ close }: NumPlayerProps): ReactElement => {
   // close only after player count update
 
   const {

@@ -1,6 +1,6 @@
-import React, { useState, ReactElement, useRef, useContext } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import { FormatTypes } from '../../../types';
+import { FormatTypes } from '../../assets/static/types';
 import { Title } from '../../components/Title';
 import { MainContext } from '../../hooks/MainContext';
 import { useSingleValueAnimation } from '../../hooks/useSingleValueAnimation';

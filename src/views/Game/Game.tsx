@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { main } from '../../assets/static/colors';
 import { TouchButton } from '../../components/TouchButton';
 import { MainContext } from '../../hooks/MainContext';
+import { NavBar } from './components/NavBar';
 import { Player } from './components/Player';
 
 interface GameProps {
@@ -13,7 +14,6 @@ export const Game = ({ setStartGame }: GameProps): ReactElement => {
   const {
     useFormats: [format],
     usePlayerList: [playerList],
-    useReset: [, setReset],
   } = useContext(MainContext);
 
   return (
@@ -21,22 +21,7 @@ export const Game = ({ setStartGame }: GameProps): ReactElement => {
       {playerList.map((player) => (
         <Player key={player.id} id={player.playerNum} />
       ))}
-      <View style={styles.navBar}>
-        <TouchButton
-          title='HOME'
-          press={() => {
-            setStartGame(false);
-          }}
-          styles={btn}
-        />
-        <TouchButton
-          title='NEW GAME'
-          press={() => {
-            setReset(true);
-          }}
-          styles={btn}
-        />
-      </View>
+      <NavBar setStartGame={setStartGame} />
     </View>
   );
 };

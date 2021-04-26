@@ -2,14 +2,14 @@ import React, { PropsWithChildren, ReactElement } from 'react';
 import { Text } from 'react-native';
 import { main } from '../assets/static/colors';
 
-interface Props {
+interface StyledTextProps {
   styles?: {};
 }
 
 export const StyledText = ({
   styles,
   children,
-}: PropsWithChildren<Props>): ReactElement => (
+}: PropsWithChildren<StyledTextProps>): ReactElement => (
   <Text
     style={{
       fontFamily: 'HelveticaNeue-Bold',

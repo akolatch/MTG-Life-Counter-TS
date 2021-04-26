@@ -2,19 +2,19 @@ import React, { ReactElement } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { StyledText } from './StyledText';
 
-interface IStylesProps {
+interface StylesProps {
   container?: {};
   text?: {};
 }
 
-interface IProps {
+interface TitleProps {
   textValue: string;
-  styles?: IStylesProps;
+  styles?: StylesProps;
 }
 export const Title = ({
   textValue,
   styles = { container: {}, text: {} },
-}: IProps): ReactElement => (
+}: TitleProps): ReactElement => (
   <View style={{ ...titleStyles.container, ...styles.container }}>
     <StyledText styles={{ ...titleStyles.text, ...titleStyles.text }}>
       {textValue}

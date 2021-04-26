@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
-import { PlayerTAction } from '../../../../types';
+import { PlayerTAction } from '../../../assets/static/types';
 import { colorList, mtg } from '../../../assets/static/colors';
 import { PressButton } from '../../../components/PressButton';
 import { StyledText } from '../../../components/StyledText';
@@ -10,6 +10,7 @@ import {
   IAction,
 } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
+import { width } from '../../../assets/static/screenSize';
 
 interface PlayerProps {
   id: number;
@@ -17,6 +18,7 @@ interface PlayerProps {
 
 export const Player = ({ id }: PlayerProps): ReactElement => {
   const {
+    usePlayerList: [playerList],
     useFormats: [format],
     onReset,
   } = useContext(MainContext);
@@ -55,7 +57,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
           },
         ],
         opacity: playersDisplay,
-        flex: 1,
+        flex: 1 / playerList.length,
       }}
     >
       <View
@@ -117,6 +119,10 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
     </Animated.View>
   );
 };
+
+const btnStyles = StyleSheet.create({
+  container: {},
+});
 
 const styles = StyleSheet.create({
   mainContainer: {

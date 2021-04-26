@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { IButtonProps } from '../assets/static/ButtonPropsInterface';
+import { IButtonProps } from '../assets/static/buttonPropsInterface';
 import { StyledText } from './StyledText';
 
 export const TouchButton = ({
