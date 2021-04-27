@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { Action } from '../lib/Interfaces';
+import { Action } from '../lib/types';
 
 interface PlayerState {
   playerId: number;
@@ -14,34 +14,34 @@ export const usePlayerTrackerReducer = () => {
     switch (action.type) {
       case 'CLASSIC':
         return {
-          playerId: action.numPayload,
+          playerId: action.payload,
           name: '',
-          placeholder: `Player${action.numPayload}`,
+          placeholder: `Player${action.payload}`,
           lifeTotal: 20,
           startingLife: 20,
         };
       case '2_HEADED_GIANT':
         return {
-          playerId: action.numPayload,
+          playerId: action.payload,
           name: '',
-          placeholder: `Team${action.numPayload}`,
+          placeholder: `Team${action.payload}`,
           lifeTotal: 30,
           startingLife: 30,
         };
       case 'COMMANDER':
         return {
-          playerId: action.numPayload,
+          playerId: action.payload,
           name: '',
-          placeholder: `Player${action.numPayload}`,
+          placeholder: `Player${action.payload}`,
           lifeTotal: 40,
           startingLife: 40,
         };
 
       case 'CHANGE_LIFE':
-        const lifeTotal = state.lifeTotal + action.numPayload;
+        const lifeTotal = state.lifeTotal + action.payload;
         return { ...state, lifeTotal };
       case 'CHANGE_NAME':
-        return { ...state, name: action.stringPayload };
+        return { ...state, name: action.payload };
       case 'RESET':
         return { ...state, lifeTotal: state.startingLife };
       default:

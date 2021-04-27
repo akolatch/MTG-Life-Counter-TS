@@ -1,3 +1,9 @@
 export { FormatTypes } from './Formats';
 export { AnimationTuple } from './Animation';
-export { PlayerAction } from './Actions';
+export {
+  PlayerActionType,
+  Action,
+  ChangeNameAction,
+  ChangeNumAction,
+  TypeChangeNumValue,
+} from './Actions';
