@@ -1,9 +1,11 @@
 import React, { ReactElement, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { PlayerColorProps } from '../../../lib/Interfaces/PlayerColorProps';
-import { colorList } from '../../../assets/static/colors';
+import { colorList, mtg } from '../../../assets/static/colors';
 import { MainContext } from '../../../hooks/MainContext';
 import { CounterTracker } from './CounterTracker';
+import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
+import { CommanderIcon } from '../../../assets/svg/CommanderIcon';
 
 export const CommanderDMGList = ({ color }: PlayerColorProps): ReactElement => {
   const {
@@ -16,9 +18,20 @@ export const CommanderDMGList = ({ color }: PlayerColorProps): ReactElement => {
   return (
     <View style={styles.container}>
       {opponentsColorList.map((opponentColor, i) => {
-        return <CounterTracker key={i} color={opponentColor} />;
+        return (
+          <CounterTracker key={i} color={opponentColor}>
+            <CommanderIcon
+              width={20}
+              height={20}
+              fill={`${mtg[`true${opponentColor}`]}`}
+            />
+          </CounterTracker>
+        );
       })}
-      <CounterTracker color={color} />
+      <CounterTracker color={color}>
+        <CommanderIcon width={20} height={20} fill={`${mtg[`true${color}`]}`} />
+        {/* <PoisonIcon width={25} height={25} fill={`${mtg[`true${color}`]}`} /> */}
+      </CounterTracker>
     </View>
   );
 };

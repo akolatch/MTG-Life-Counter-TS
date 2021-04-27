@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
 import { TextInput, View, StyleSheet, Animated } from 'react-native';
-import { PlayerAction } from '../../../lib/types';
+
 import { colorList, mtg } from '../../../assets/static/colors';
 import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
@@ -10,7 +10,8 @@ import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation'
 import { width } from '../../../assets/static/screenSize';
 import { CounterTracker } from './CounterTracker';
 import { CommanderDMGList } from './CommanderBar';
-import { Action } from '../../../lib/Interfaces';
+import { ChangeNumAction, TypeChangeNumValue } from '../../../lib/types';
+import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
 
 interface PlayerProps {
   id: number;
@@ -26,23 +27,21 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
   const color = colorList[id - 1];
   const [playersDisplay, animatePlayersDisplay] = useSingleValueAnimation();
 
-  const createAction = (
-    type: PlayerAction,
-    numPayload: number = 0,
-    stringPayload: string = ''
-  ): Action => ({
+  const createNumAction = (
+    type: TypeChangeNumValue,
+    payload: number
+  ): ChangeNumAction => ({
     type,
-    numPayload,
-    stringPayload,
+    payload,
   });
 
-  onReset(() => dispatch(createAction('RESET')));
+  onReset(() => dispatch({ type: 'RESET' }));
 
   const changeLife = (amount: number): void => {
-    dispatch(createAction('CHANGE_LIFE', amount));
+    dispatch(createNumAction('CHANGE_LIFE', amount));
   };
   useEffect(() => {
-    dispatch(createAction(format, id));
+    dispatch(createNumAction(format, id));
     animatePlayersDisplay(1, 500);
   }, []);
 
@@ -71,14 +70,20 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
             value={player.name}
             placeholder={player.placeholder}
             onChangeText={(text: string) =>
-              dispatch(createAction('CHANGE_NAME', 0, text))
+              dispatch({ type: 'CHANGE_NAME', payload: text })
             }
           />
           {format === 'COMMANDER' ? (
             <CommanderDMGList color={color} />
           ) : (
             <View style={styles.poisonContainer}>
-              <CounterTracker color={color} />
+              <CounterTracker color={color}>
+                <PoisonIcon
+                  width={30}
+                  height={30}
+                  fill={`${mtg[`true${color}`]}`}
+                />
+              </CounterTracker>
             </View>
           )}
         </View>

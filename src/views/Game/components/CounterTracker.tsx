@@ -4,14 +4,19 @@ import React, {
   useRef,
   useContext,
   ReactElement,
+  PropsWithChildren,
 } from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import { PlayerColorProps } from '../../../lib/Interfaces/PlayerColorProps';
 import { mtg } from '../../../assets/static/colors';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
+import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
 
-export const CounterTracker = ({ color }: PlayerColorProps): ReactElement => {
+export const CounterTracker = ({
+  color,
+  children,
+}: PropsWithChildren<PlayerColorProps>): ReactElement => {
   const [damage, setDamage] = useState(0);
   const [showMinus, setShowMinus] = useState(false);
   const increment = useRef(1);
@@ -57,8 +62,15 @@ export const CounterTracker = ({ color }: PlayerColorProps): ReactElement => {
         onPressOut={press}
       >
         <View style={styles.view}>
+          {showMinus ? (
+            <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
+              -
+            </StyledText>
+          ) : (
+            children
+          )}
           <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
-            {showMinus ? `- ${damage}` : `P ${damage}`}
+            {damage}
           </StyledText>
         </View>
       </Pressable>
@@ -68,7 +80,6 @@ export const CounterTracker = ({ color }: PlayerColorProps): ReactElement => {
 
 const styles = StyleSheet.create({
   text: {
-    right: 0,
     fontSize: 20,
   },
   view: {
@@ -77,6 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 50,
     height: 30,
+    // backgroundColor: 'red',
   },
   btnContainer: {
     backgroundColor: mtg.trueWhite,
