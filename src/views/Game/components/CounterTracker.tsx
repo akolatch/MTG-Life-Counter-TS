@@ -11,7 +11,7 @@ import { PlayerColorProps } from '../../../lib/Interfaces/PlayerColorProps';
 import { mtg } from '../../../assets/static/colors';
 import { StyledText } from '../../../components/StyledText';
 import { MainContext } from '../../../hooks/MainContext';
-import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const CounterTracker = ({
   color,
@@ -63,9 +63,10 @@ export const CounterTracker = ({
       >
         <View style={styles.view}>
           {showMinus ? (
-            <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
-              -
-            </StyledText>
+            // <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
+            //   -
+            // </StyledText>
+            <Icon name='minus' color={mtg[`true${color}`]} />
           ) : (
             children
           )}

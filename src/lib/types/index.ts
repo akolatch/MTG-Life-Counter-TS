@@ -7,3 +7,4 @@ export {
   ChangeNumAction,
   TypeChangeNumValue,
 } from './Actions';
+export { Colors } from './Colors';

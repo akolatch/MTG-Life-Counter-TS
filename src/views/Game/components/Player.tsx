@@ -9,6 +9,7 @@ import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation'
 import { width } from '../../../assets/static/screenSize';
 import { ChangeNumAction, TypeChangeNumValue } from '../../../lib/types';
 import { Header } from './Header';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface PlayerProps {
   id: number;
