@@ -1,6 +1,5 @@
 import React, { ReactElement, useContext, useEffect } from 'react';
-import { TextInput, View, StyleSheet, Animated } from 'react-native';
-
+import { View, StyleSheet, Animated } from 'react-native';
 import { colorList, mtg } from '../../../assets/static/colors';
 import { LongPressButton } from '../../../components/LongPressButton';
 import { StyledText } from '../../../components/StyledText';
@@ -8,10 +7,8 @@ import { MainContext } from '../../../hooks/MainContext';
 import { usePlayerTrackerReducer } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
 import { width } from '../../../assets/static/screenSize';
-import { CounterTracker } from './CounterTracker';
-import { CommanderDMGList } from './CommanderBar';
 import { ChangeNumAction, TypeChangeNumValue } from '../../../lib/types';
-import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
+import { Header } from './Header';
 
 interface PlayerProps {
   id: number;
@@ -45,6 +42,8 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
     animatePlayersDisplay(1, 500);
   }, []);
 
+  const changeName = (text: string): void =>
+    dispatch({ type: 'CHANGE_NAME', payload: text });
   return (
     <Animated.View
       style={{
@@ -63,30 +62,7 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
       <View
         style={{ backgroundColor: mtg[`off${color}`], ...styles.mainContainer }}
       >
-        <View style={styles.header}>
-          <TextInput
-            style={{ ...styles.name, color: mtg[`true${color}`] }}
-            placeholderTextColor={mtg[`true${color}`]}
-            value={player.name}
-            placeholder={player.placeholder}
-            onChangeText={(text: string) =>
-              dispatch({ type: 'CHANGE_NAME', payload: text })
-            }
-          />
-          {format === 'COMMANDER' ? (
-            <CommanderDMGList color={color} />
-          ) : (
-            <View style={styles.poisonContainer}>
-              <CounterTracker color={color}>
-                <PoisonIcon
-                  width={30}
-                  height={30}
-                  fill={`${mtg[`true${color}`]}`}
-                />
-              </CounterTracker>
-            </View>
-          )}
-        </View>
+        <Header player={player} color={color} changeName={changeName} />
         <View style={styles.center}>
           <View style={styles.lifeContainer}>
             <LongPressButton
@@ -100,7 +76,6 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
                 ...btnStyles,
               }}
             />
-
             <View style={styles.countContainer}>
               <StyledText
                 styles={{ color: mtg[`true${color}`], ...styles.countNum }}
@@ -128,14 +103,12 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
 
 const btnStyles = StyleSheet.create({
   container: {
-    // backgroundColor: 'blue',
     width: width / 3,
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
   },
   view: {
-    // backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -145,24 +118,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'flex-start',
-    // backgroundColor: 'red',
-    height: 50,
-  },
-  name: {
-    fontFamily: 'HelveticaNeue-Bold',
-    fontSize: 25,
-    paddingTop: 5,
-    paddingLeft: 10,
-  },
-  poisonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
+
   center: {
     flex: 1,
     justifyContent: 'center',
