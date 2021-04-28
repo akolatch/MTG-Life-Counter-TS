@@ -66,17 +66,9 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
         <Header player={player} color={color} changeName={changeName} />
         <View style={styles.center}>
           <View style={styles.lifeContainer}>
-            <LongPressButton
-              title='-'
-              press={() => changeLife(-1)}
-              styles={{
-                text: {
-                  fontSize: 60,
-                  color: mtg[`true${color}`],
-                },
-                ...btnStyles,
-              }}
-            />
+            <LongPressButton press={() => changeLife(-1)} styles={btnStyles}>
+              <Icon name='minus' size={60} color={mtg[`true${color}`]} />
+            </LongPressButton>
             <View style={styles.countContainer}>
               <StyledText
                 styles={{ color: mtg[`true${color}`], ...styles.countNum }}
@@ -84,17 +76,9 @@ export const Player = ({ id }: PlayerProps): ReactElement => {
                 {player.lifeTotal}
               </StyledText>
             </View>
-            <LongPressButton
-              title='+'
-              press={() => changeLife(1)}
-              styles={{
-                text: {
-                  fontSize: 60,
-                  color: mtg[`true${color}`],
-                },
-                ...btnStyles,
-              }}
-            />
+            <LongPressButton press={() => changeLife(1)} styles={btnStyles}>
+              <Icon name='plus' size={60} color={mtg[`true${color}`]} />
+            </LongPressButton>
           </View>
         </View>
       </View>
@@ -108,10 +92,6 @@ const btnStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
-  },
-  view: {
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

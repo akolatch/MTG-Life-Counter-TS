@@ -1,13 +1,18 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useRef,
+  PropsWithChildren,
+} from 'react';
 import { Pressable, View } from 'react-native';
 import { IButtonProps } from '../lib/Interfaces';
 import { StyledText } from './StyledText';
 
 export const LongPressButton = ({
-  title,
   press,
   styles,
-}: IButtonProps): ReactElement => {
+  children,
+}: PropsWithChildren<IButtonProps>): ReactElement => {
   // this is not the long term solution
   const longCall = useRef<NodeJS.Timeout>();
   useEffect(() => {
@@ -28,9 +33,7 @@ export const LongPressButton = ({
         clearInterval(longCall.current!);
       }}
     >
-      <View style={styles.view}>
-        <StyledText styles={styles.text}>{title}</StyledText>
-      </View>
+      <View style={styles.view}>{children}</View>
     </Pressable>
   );
 };

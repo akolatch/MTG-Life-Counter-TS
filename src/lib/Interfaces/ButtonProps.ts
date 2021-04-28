@@ -5,7 +5,7 @@ interface ButtonStylesProps {
 }
 
 export interface IButtonProps {
-  title: string;
+  title?: string;
   press: () => any;
   styles: ButtonStylesProps;
 }
