@@ -29,8 +29,7 @@ export const CommanderDMGList = ({ color }: PlayerColorProps): ReactElement => {
         );
       })}
       <CounterTracker color={color}>
-        <CommanderIcon width={20} height={20} fill={`${mtg[`true${color}`]}`} />
-        {/* <PoisonIcon width={25} height={25} fill={`${mtg[`true${color}`]}`} /> */}
+        <PoisonIcon width={25} height={25} fill={`${mtg[`true${color}`]}`} />
       </CounterTracker>
     </View>
   );
@@ -41,5 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 });

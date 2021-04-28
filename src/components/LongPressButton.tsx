@@ -9,9 +9,9 @@ export const LongPressButton = ({
   styles,
 }: IButtonProps): ReactElement => {
   // this is not the long term solution
-  const longCall = useRef<any>(null);
+  const longCall = useRef<NodeJS.Timeout>();
   useEffect(() => {
-    return () => clearInterval(longCall.current);
+    return () => clearInterval(longCall.current!);
   }, []);
 
   return (
@@ -25,7 +25,7 @@ export const LongPressButton = ({
         longCall.current = setInterval(press, 200);
       }}
       onPressOut={() => {
-        clearInterval(longCall.current);
+        clearInterval(longCall.current!);
       }}
     >
       <View style={styles.view}>

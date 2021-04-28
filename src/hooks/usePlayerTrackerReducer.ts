@@ -1,13 +1,6 @@
 import { useReducer } from 'react';
+import { PlayerState } from '../lib/Interfaces';
 import { Action } from '../lib/types';
-
-interface PlayerState {
-  playerId: number;
-  name: string;
-  placeholder: string;
-  lifeTotal: number;
-  startingLife: number;
-}
 
 export const usePlayerTrackerReducer = () => {
   const reducer = (state: PlayerState, action: Action): PlayerState => {

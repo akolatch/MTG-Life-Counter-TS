@@ -22,7 +22,7 @@ export const CounterTracker = ({
   const increment = useRef(1);
 
   const { onReset } = useContext(MainContext);
-  onReset(() => {
+  onReset((): void => {
     setDamage(0);
     setShowMinus(false);
     increment.current = 1;
@@ -41,17 +41,17 @@ export const CounterTracker = ({
     }
   };
 
-  const clicksStoppedTimer = useRef<any>(null);
+  const clicksStoppedTimer = useRef<NodeJS.Timeout>();
 
-  useEffect(() => {
+  useEffect((): (() => void) => {
     if (showMinus) {
-      clearTimeout(clicksStoppedTimer.current);
+      clearTimeout(clicksStoppedTimer.current!);
       clicksStoppedTimer.current = setTimeout((): void => {
         setShowMinus(false);
         increment.current = 1;
       }, 500);
     }
-    return (): void => clearTimeout(clicksStoppedTimer.current);
+    return (): void => clearTimeout(clicksStoppedTimer.current!);
   }, [damage]);
 
   return (
