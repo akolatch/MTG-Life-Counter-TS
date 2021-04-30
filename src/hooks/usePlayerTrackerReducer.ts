@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { PlayerState } from '../lib/Interfaces';
-import { Action } from '../lib/types';
+import { Action, ChangeNumAction, TypeChangeNumValue } from '../lib/types';
 
 export const usePlayerTrackerReducer = () => {
   const reducer = (state: PlayerState, action: Action): PlayerState => {
@@ -42,12 +42,20 @@ export const usePlayerTrackerReducer = () => {
     }
   };
 
-  const playerReducer = useReducer(reducer, {
+  const usePlayerReducer = useReducer(reducer, {
     playerId: 0,
     name: '',
     placeholder: '',
     lifeTotal: 20,
     startingLife: 40,
   });
-  return playerReducer;
+
+  const dispatchNumAction = (type: TypeChangeNumValue, payload: number) => {
+    usePlayerReducer[1]({
+      type,
+      payload,
+    });
+  };
+
+  return { usePlayerReducer, dispatchNumAction };
 };

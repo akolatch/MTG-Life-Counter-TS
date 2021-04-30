@@ -6,17 +6,16 @@ import React, {
 } from 'react';
 import { Pressable, View } from 'react-native';
 import { IButtonProps } from '../lib/Interfaces';
-import { StyledText } from './StyledText';
 
 export const LongPressButton = ({
   press,
   styles,
   children,
 }: PropsWithChildren<IButtonProps>): ReactElement => {
-  // this is not the long term solution
-  const longCall = useRef<NodeJS.Timeout>();
+  const longCall = useRef<ReturnType<typeof setInterval>>();
+
   useEffect(() => {
-    return () => clearInterval(longCall.current!);
+    return () => clearInterval(longCall.current);
   }, []);
 
   return (
@@ -30,7 +29,7 @@ export const LongPressButton = ({
         longCall.current = setInterval(press, 200);
       }}
       onPressOut={() => {
-        clearInterval(longCall.current!);
+        clearInterval(longCall.current);
       }}
     >
       <View style={styles.view}>{children}</View>

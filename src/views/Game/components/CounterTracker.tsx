@@ -41,17 +41,17 @@ export const CounterTracker = ({
     }
   };
 
-  const clicksStoppedTimer = useRef<NodeJS.Timeout>();
+  const clicksStoppedTimer = useRef<ReturnType<typeof setInterval>>();
 
   useEffect((): (() => void) => {
     if (showMinus) {
-      clearTimeout(clicksStoppedTimer.current!);
+      clearTimeout(clicksStoppedTimer.current);
       clicksStoppedTimer.current = setTimeout((): void => {
         setShowMinus(false);
         increment.current = 1;
       }, 500);
     }
-    return (): void => clearTimeout(clicksStoppedTimer.current!);
+    return (): void => clearTimeout(clicksStoppedTimer.current);
   }, [damage]);
 
   return (
@@ -63,9 +63,6 @@ export const CounterTracker = ({
       >
         <View style={styles.view}>
           {showMinus ? (
-            // <StyledText styles={{ ...styles.text, color: mtg[`true${color}`] }}>
-            //   -
-            // </StyledText>
             <Icon name='minus' color={mtg[`true${color}`]} />
           ) : (
             children

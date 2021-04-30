@@ -7,7 +7,6 @@ import { MainContext } from '../../../hooks/MainContext';
 import { usePlayerTrackerReducer } from '../../../hooks/usePlayerTrackerReducer';
 import { useSingleValueAnimation } from '../../../hooks/useSingleValueAnimation';
 import { width } from '../../../assets/static/screenSize';
-import { ChangeNumAction, TypeChangeNumValue } from '../../../lib/types';
 import { Header } from './Header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -16,35 +15,42 @@ interface PlayerProps {
 }
 
 export const Player = ({ id }: PlayerProps): ReactElement => {
+  // pull in animation hook
+  const [playersDisplay, animatePlayersDisplay] = useSingleValueAnimation();
+
+  // pull in context
   const {
     usePlayerList: [playerList],
     useFormats: [format],
     onReset,
   } = useContext(MainContext);
-  const [player, dispatch] = usePlayerTrackerReducer();
+
+  // pull in reducer hook
+  const {
+    usePlayerReducer: [player, dispatch],
+    dispatchNumAction,
+  } = usePlayerTrackerReducer();
+
+  // set const for color
   const color = colorList[id - 1];
-  const [playersDisplay, animatePlayersDisplay] = useSingleValueAnimation();
 
-  const createNumAction = (
-    type: TypeChangeNumValue,
-    payload: number
-  ): ChangeNumAction => ({
-    type,
-    payload,
-  });
-
-  onReset(() => dispatch({ type: 'RESET' }));
-
-  const changeLife = (amount: number): void => {
-    dispatch(createNumAction('CHANGE_LIFE', amount));
-  };
+  // setting initial state on components didMount
   useEffect(() => {
-    dispatch(createNumAction(format, id));
+    dispatchNumAction(format, id);
     animatePlayersDisplay(1, 500);
   }, []);
 
+  // passing onReset hook the rest call back
+  onReset((): void => dispatch({ type: 'RESET' }));
+
+  // establishing button methods
+  const changeLife = (amount: number): void => {
+    dispatchNumAction('CHANGE_LIFE', amount);
+  };
+
   const changeName = (text: string): void =>
     dispatch({ type: 'CHANGE_NAME', payload: text });
+
   return (
     <Animated.View
       style={{
