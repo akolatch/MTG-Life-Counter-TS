@@ -5,7 +5,7 @@ import { mtg } from '../../../assets/static/colors';
 import { PoisonIcon } from '../../../assets/svg/PoisonIcon';
 import { MainContext } from '../../../hooks/MainContext';
 import { PlayerColorProps, PlayerState } from '../../../lib/Interfaces';
-import { CommanderDMGList } from './CommanderBar';
+import { CounterBar } from './CounterBar';
 import { CounterTracker } from './CounterTracker';
 
 interface HeaderProps extends PlayerColorProps {
@@ -30,7 +30,7 @@ export const Header = ({
         onChangeText={changeName}
       />
       {format === 'COMMANDER' ? (
-        <CommanderDMGList color={color} />
+        <CounterBar color={color} />
       ) : (
         <View style={styles.poisonContainer}>
           <CounterTracker color={color}>
